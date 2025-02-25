@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HTML</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Event Registration Form</h1>
+    <form id="userProfileForm">
+    <label for="userName">Name:</label>
+    <input type ="text" id="userName" />
+    <br>
+    <br>
+
+    <label for="emailAddress">Email Address:</label>
+    <input type="email" id="emailAddress"></input>
+
+    <br>
+    <br>
+    <label>Event Type:</label><br>
+    <label for="conference"><input type="radio" name ="program" 
+      value="Conference" id="conference"/> Conference</label>
+      <br>
+
+      <label for="workshop"><input type="radio" name ="program" 
+        value="Workshop" id="workshop" />Workshop</label>
+        
+        <br>
+        <label for="networking"><input type="radio" name ="program" 
+          value="Networking" id="networking"/>Networking</label>
+   
+        <br>
+        <br>
+
+        <label>Dietary Restrictions:</label><br>
+        <label for="vegetarian"><input type="checkbox" name="dietary" 
+          value="Vegetarian" id="vegetarian"/>Vegetarian</label>
+          <br>
+        <label for="vegan"><input type="checkbox" name="dietary" 
+          value="Vegan" id="vegan"/>Vegan</label>
+          <br>
+        <label for="gluten-free"><input type="checkbox" name="dietary" 
+          value="Gluten-free" id="gluten-free"/>Gluten-free</label>
+        <br>
+        <br>
+        <label>T-shirt Size:</label>
+        <select id="sizeSelect">
+          <option value="Small">Small</option>
+          <option value="Medium">Medium</option>
+          <option value="Large">Large</option>
+        </select>
+        <br>
+        <br>
+       <input type="submit" value="Register"/>
+</form> 
+<div id="formResult"></div>
+   
+  
+  <script>
+
+const userProfileForm = document.getElementById("userProfileForm")
+  userProfileForm.addEventListener("submit",function(event){
+
+    event.preventDefault()
+
+const userName = document.getElementById("userName").value
+const emailAddress = document.getElementById("emailAddress").value
+const program = document.querySelector('input[name="program"]:checked').value
+const dietary = document.querySelectorAll('input[name="dietary"]:checked')
+let selectedDietary = []
+
+ for (let i=0;i<dietary.length; i++){
+  selectedDietary.push(dietary[i].value)
+ }
+
+ const shirtSize = document.getElementById("sizeSelect").value
+
+
+   const userInputValues = `<h2>Submited Event Information</h2>
+  <p><strong>Name:</strong> ${userName}</p>
+  <p><strong>Email Address:</strong> ${emailAddress}</P>
+  <p><strong>Event:</strong> ${program}</p>
+  <p><strong>Dietary:</strong> ${selectedDietary.join(' ')}</p>
+  <p><strong> T-shirt Size:</strong> ${shirtSize}</P>`
+    const divElement= document.getElementById("formResult")
+    divElement.innerHTML = userInputValues
+
+  })
+
+
+
+  </script>
+  </body>
+</html>
